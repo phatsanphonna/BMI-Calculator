@@ -13,15 +13,19 @@ runButton.addEventListener('click', () => {
     let height_m = height.value / 100
     let total = weight.value / (height_m ** 2)
     let status
-    
+
+
     if (total < 18.50) {
         status = 'ผอม'
     } else if (total >= 18.50 && total < 22.90) {
         status = 'ปกติ'
-    } else {
+    } else if (total >= 22.90) {
         status = 'อ้วน'
     }
-
-    resultTitle.innerHTML = `ค่า BMI ของคุณคือ ${total.toFixed(2)}`
-    resultDescription.innerHTML = `คุณอยู่ในระดับ ${status}`
+    if (weight === NaN || height === NaN) {
+        resultTitle.innerHTML = `ใส่ตัวเลขมาด้วย`
+    } else {
+        resultTitle.innerHTML = `ค่า BMI ของคุณคือ ${total.toFixed(2)}`
+        resultDescription.innerHTML = `คุณอยู่ในระดับ ${status}`
+    }
 })
