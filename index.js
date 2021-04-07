@@ -10,10 +10,17 @@ var resultDescription = document.getElementById('result-description')
 const runButton = document.getElementById('send-button')
 
 runButton.addEventListener('click', () => {
-    let height_m = height.value / 100
-    let total = weight.value / (height_m ** 2)
+    console.log(weight.value)
+    console.log(height.value)
+    
+    if (weight === null || height === null) {
+        resultTitle.innerHTML = `ใส่ตัวเลขมาด้วย`
+        return
+    }
+    
+    let height_m = Number(height.value / 100)
+    let total = Number(weight.value / (height_m ** 2))
     let status
-
 
     if (total < 18.50) {
         status = 'ผอม'
@@ -22,10 +29,8 @@ runButton.addEventListener('click', () => {
     } else if (total >= 22.90) {
         status = 'อ้วน'
     }
-    if (weight === NaN || height === NaN) {
-        resultTitle.innerHTML = `ใส่ตัวเลขมาด้วย`
-    } else {
-        resultTitle.innerHTML = `ค่า BMI ของคุณคือ ${total.toFixed(2)}`
-        resultDescription.innerHTML = `คุณอยู่ในระดับ ${status}`
-    }
+
+    resultTitle.innerHTML = `ค่า BMI ของคุณคือ ${total.toFixed(2)}`
+    resultDescription.innerHTML = `คุณอยู่ในระดับ ${status}`
+
 })
